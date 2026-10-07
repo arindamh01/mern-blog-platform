@@ -1,0 +1,18 @@
+{
+  "name": "mern-blog-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MERN blog platform with JWT auth, RBAC, admin panel and real-time notifications",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "db:up": "docker compose up -d mongo",
+    "db:down": "docker compose down",
+    "seed": "npm run seed --prefix server",
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "test": "npm test --prefix server && npm test --prefix client",
+    "build": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
