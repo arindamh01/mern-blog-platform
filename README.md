@@ -206,9 +206,9 @@ The config is validated with Zod at startup. The server exits with a clear messa
 ```text
 Browser ──► https://<app>.vercel.app
               ├── /*        → React build (SPA fallback to index.html)
-              └── /api/*    → rewritten to https://inkwell-api.onrender.com/api/*
+              └── /api/*    → rewritten to https://inkwell-api-omm2.onrender.com/api/*
 
-Browser ──► https://inkwell-api.onrender.com/socket.io   (direct WebSocket, authenticated with the access token)
+Browser ──► https://inkwell-api-omm2.onrender.com/socket.io   (direct WebSocket, authenticated with the access token)
 ```
 
 **Why proxy `/api` through Vercel?** The refresh token is an `httpOnly` cookie. If the browser called `*.onrender.com` directly, it would be a third-party cookie, which Safari, Brave and incognito modes block, and users would be logged out on every reload. Through the rewrite, the browser only ever talks to the Vercel domain, so the cookie stays first-party and can use `SameSite=Lax`. Socket.io connects to Render directly because Vercel rewrites don't carry WebSockets, and sockets authenticate with the access token rather than a cookie.
@@ -228,11 +228,11 @@ Browser ──► https://inkwell-api.onrender.com/socket.io   (direct WebSocket
    - `MONGO_URI`: the Atlas URI
    - `CLIENT_URL` and `SERVER_URL`: **both** set to your Vercel URL, for example `https://inkwell.vercel.app`. `SERVER_URL` is the Vercel URL because OAuth callbacks also go through the rewrite.
    - The OAuth keys (optional)
-3. Check `https://inkwell-api.onrender.com/api/v1/health`. If Render assigned a different hostname, update the rewrite destination in `client/vercel.json`.
+3. Check `https://inkwell-api-omm2.onrender.com/api/v1/health`. If Render assigned a different hostname, update the rewrite destination in `client/vercel.json`.
 
 ### 3. Vercel (client)
 1. *Add New → Project*, import the repo and set **Root Directory** to `client`.
-2. Add the environment variable `VITE_SOCKET_URL=https://inkwell-api.onrender.com`. Leave `VITE_API_URL` unset; it defaults to `/api/v1`.
+2. Add the environment variable `VITE_SOCKET_URL=https://inkwell-api-omm2.onrender.com`. Leave `VITE_API_URL` unset; it defaults to `/api/v1`.
 3. Deploy. If the final Vercel URL differs from what you put in `CLIENT_URL`/`SERVER_URL` on Render, update those and redeploy the API.
 
 ### 4. OAuth callback URLs (production)
