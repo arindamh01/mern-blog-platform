@@ -1,0 +1,41 @@
+{
+  "name": "mern-blog-server",
+  "version": "1.0.0",
+  "description": "REST API for the MERN blog platform",
+  "main": "src/server.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node scripts/seed.js",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --coverage"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.5",
+    "morgan": "^1.12.1",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "slugify": "^1.6.9",
+    "socket.io": "^4.8.4",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "mongodb-memory-server": "^11.3.0",
+    "socket.io-client": "^4.8.4",
+    "supertest": "^7.3.1"
+  }
+}
